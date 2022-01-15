@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\title{Preparación exámen MC. Ejercicios resueltos de examen.}
+\author{Cristina Sanchez}
+\date{15 enero 2022}
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Introduction}
+En este documento podéis encontrar resumenes de teoría y ejercicios de examen resueltos de cosas que pueden entrar en el exámen de MC. Espero que os sirva de ayuda. 
+
+\subsection{Contenidos:} 
+\subsubsection{Conversiones}
+\begin{itemize}
+    \item Lenguaje $\rightarrow$ Autómata
+    \item Lenguaje $\rightarrow$ ER $\checkmark$
+    \item Lenguaje $\rightarrow$ Gramática 
+    \item ER $\rightarrow$ Lenguaje 
+    \item ER $\rightarrow$ Autómata 
+    \item ER  $\rightarrow$  Gramática  
+    \item Autómata  $\rightarrow$  lenguaje 
+    \item Autómata  $\rightarrow$  ER
+    \item Autómata  $\rightarrow$ Gramática
+    \item Gramáticas  $\rightarrow$  Lenguaje 
+    \item Gramáticas  $\rightarrow$  Automata  
+    \item Gramáticas  $\rightarrow$  ER
+\end{itemize}
+\subsubsection{AutPila}
+\begin{itemize}
+    \item leng $\rightarrow$ pila    
+    \item Gr $\rightarrow$ pila 
+    \item pila $\rightarrow$ Gr
+\end{itemize}
+\subsubsection{Ejercicios tipo}
+\begin{itemize}
+    \item Bombeo
+    \item Propiedades ER 
+    \item Minimizar autómatas
+    \item Pasar a Chomsky 
+    \item Algoritmo Cocke-Younger-Kasami    
+\end{itemize}
+\newpage
+\section{Conversiones}
+\subsection{Lenguaje a ER}
+\subsubsection{Enunciado}
+A = \{1, 0\}
+\newline
+Construir una ER para palabras en las que el número de ceros es par
+\subsubsection{Resolución}
+Pensamos en palabras que puedan estar contenidas en este lenguaje: 
+\newline 
+111 0110 1010 1001 
+\newline 
+Es decir, puede empezar, o no, por un 1 y los 0 pueden estar separados por una cantidad 0 o ilimitada de 1. Luego, al igual que empieza, la palabra puede terminar, o no, por 1. Con esta idea, llegamos al siguiente autómata: 
+\newline
+\[1^*(01^*0)^*1^*\]
+\newline
+Pero tiene un problema. No nos permitiría palabras del estilo 00100. Para eso debería de alternarse entre los 0 la clausura de un 1 y ya no necesitamos la clausura final. Después de esto ya tenemos la solución: 
+\subsubsection{Resultado}
+\[1^*(01^*01^*)^*\]
+\newpage
+\subsubsection{Enunciado}
+A = \{1, 0\}
+\newline
+Da una ER para palabras que contengan 1001 como secuencia
+\subsubsection{Resolución}
+Este es fácil. Se puede poner tantos 0 o 1 al principio y al final de esa secuencia. Eso nos deja con la siguiente expresión:
+\subsubsection{Resultado}
+\[(0 + 1)^*1001(0 + 1)^*\]
+\newpage
+\section{Pila}
+\subsection{Lenguaje a AutPila}
+\subsubsection{Enunciado}
+Describir el autómata que acepte el siguiente lenguaje: 
+\[L = \{0^i1^i : i > 0\}\]
+Tanto por pila vacía como por estados finales. 
+\subsubsection{Resolución}
+Un autómata con pila está definido por 7 elementos:
+\begin{itemize}
+    \item $\delta$: Las transciciones del autómata 
+    \item A: El alfabeto del autómata 
+    \item B: El alfabeto de la pila 
+    \item q: El conjunto de estados 
+    \item F: El conjunto de estados finales 
+    \item R: La letra incial de la pila 
+    \item $q_0$: El estado inicial del autómata 
+\end{itemize}
+(Voy a hacerlo sin el grafo porque no me aptece ahora aprender a dibujar grafos en LaTeX)
+
+\subsubsection{Resultado}
+\textbf{Por pila vacía}
+\begin{itemize}
+    \item A = \{0,1\}
+    \item B = \{R,X\}
+    \item q = \{$q_0$,$q_1$\}
+    \item F = \{$\epsilon$\}
+\end{itemize}
+\[\delta(q_0, R, 0) = \{(q_0, XR)\}\]
+\[\delta(q_0, X, 0) = \{(q_0, XX)\}\]
+\[\delta(q_0, R, \epsilon) = \{(q_0, \epsilon)\}\]
+\[\delta(q_0, X, 1) = \{(q_1, \epsilon)\}\]
+\[\delta(q_1, X, 1) = \{(q_1, \epsilon)\}\]
+\[\delta(q_1, R, \epsilon) = \{(q_1, \epsilon)\}\]
+\newline
+\textbf{Por estado final}
+Análogo al anterior pero dos de las transiciones cambian
+\[\delta(q_0, R, \epsilon) = \{(q_3, \epsilon)\}\]
+\[\delta(q_1, R, \epsilon) = \{(q_f, \epsilon)\}\]
+Donde $q_f$ es el estado final
+\newpage
+\section{Ejercicios tipo}
+\newpage
+Buena suerte con el examen!!!
+\end{document}
+
